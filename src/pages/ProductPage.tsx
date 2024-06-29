@@ -4,6 +4,7 @@ import { useSearchParams } from "react-router-dom";
 import ProductColumn from "../components/ui/productColumn";
 import { useGetProductsQuery } from "../redux/features/product/productApi";
 import { TQueryObject } from "../types/common";
+import { Helmet } from "react-helmet-async";
 
 const ProductPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -44,6 +45,9 @@ const ProductPage = () => {
 
   return (
     <div className='space-y-4'>
+      <Helmet>
+        <title>Products | Product Management</title>
+      </Helmet>
       <Table
         columns={ProductColumn}
         dataSource={data?.products}

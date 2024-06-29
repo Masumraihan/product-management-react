@@ -15,6 +15,7 @@ import {
 } from "../redux/features/product/productApi";
 import { TProduct } from "../types";
 import EditProductLoader from "../components/ui/EditProductLoader";
+import { Helmet } from "react-helmet-async";
 
 const EditProduct = () => {
   const params = useParams();
@@ -101,6 +102,9 @@ const EditProduct = () => {
   }, [product]);
   return (
     <div>
+      <Helmet>
+        <title>Edit {`${product?.title}`} | Product Management</title>
+      </Helmet>
       <Breadcrumb items={breadcrumbItems} />
       {isLoading ? (
         <EditProductLoader />

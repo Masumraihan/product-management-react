@@ -4,6 +4,7 @@ import ProductDetailsLoader from "../components/ui/ProductDetailsLoader";
 import ProductImages from "../components/ui/ProductImages";
 import Reviews from "../components/ui/Reviews";
 import { useGetSingleProductQuery } from "../redux/features/product/productApi";
+import { Helmet } from "react-helmet-async";
 
 const ProductDetailsPage = () => {
   const params = useParams();
@@ -22,6 +23,9 @@ const ProductDetailsPage = () => {
   ];
   return (
     <div className='space-y-4'>
+      <Helmet>
+        <title> {`${product?.title}`} | Product Management</title>
+      </Helmet>
       <Breadcrumb items={breadcrumbItems} />
       {isLoading ? (
         <ProductDetailsLoader />
