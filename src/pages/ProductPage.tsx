@@ -1,9 +1,9 @@
-import { useSearchParams } from "react-router-dom";
-import { useGetProductsQuery } from "../redux/features/product/productApi";
-import { TQueryObject } from "../types/common";
 import { Pagination, PaginationProps, Table } from "antd";
 import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import ProductColumn from "../components/ui/productColumn";
+import { useGetProductsQuery } from "../redux/features/product/productApi";
+import { TQueryObject } from "../types/common";
 
 const ProductPage = () => {
   const [currentPage, setCurrentPage] = useState(1);

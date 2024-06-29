@@ -40,6 +40,7 @@ const ReviewForm = ({ reviews, id }: { reviews?: TReview[]; id?: string }) => {
         if (result.isConfirmed) {
           const res = (await updateProduct({ id: id, data: payload })) as { data: TProduct };
           // API DOES NOT RETURN THE FULL PRODUCT DATA AFTER UPDATE
+          form.resetFields();
           console.log(res);
           if (res.data?.id) {
             Alert.fire("Product review updated", "", "success");
