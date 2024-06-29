@@ -1,18 +1,19 @@
+import { Breadcrumb, Button, Col, Row } from "antd";
+import { useEffect, useState } from "react";
+import { FieldValues, SubmitHandler } from "react-hook-form";
 import { Link, useParams } from "react-router-dom";
+import Alert from "sweetalert2";
+import CustomForm from "../components/Forms/CustomForm";
+import CustomInput from "../components/Forms/CustomInput";
+import CustomSelect from "../components/Forms/CustomSelect";
+import CustomTextArea from "../components/Forms/CustomTextArea";
+import ReviewForm from "../components/ui/ReviewForm";
+import { useGetCategoryListQuery } from "../redux/features/category/categoryApi";
 import {
   useGetSingleProductQuery,
   useUpdateProductMutation,
 } from "../redux/features/product/productApi";
-import { Breadcrumb, Button } from "antd";
-import CustomForm from "../components/Forms/CustomForm";
-import CustomInput from "../components/Forms/CustomInput";
-import { useEffect, useState } from "react";
-import CustomSelect from "../components/Forms/CustomSelect";
-import { useGetCategoryListQuery } from "../redux/features/category/categoryApi";
-import CustomTextArea from "../components/Forms/CustomTextArea";
-import { FieldValues, SubmitHandler } from "react-hook-form";
 import { TProduct } from "../types";
-import Swal from "sweetalert2";
 
 const EditProduct = () => {
   const params = useParams();
@@ -42,7 +43,6 @@ const EditProduct = () => {
   const breadcrumbItems = [
     {
       title: <Link to='/'>Home</Link>,
-      href: "/",
     },
     {
       title: <Link to='/products'>Products</Link>,
@@ -54,7 +54,7 @@ const EditProduct = () => {
 
   const handleSubmit: SubmitHandler<FieldValues> = async (values) => {
     try {
-      Swal.fire({
+      Alert.fire({
         title: "Do you want to update this product?",
         showCancelButton: true,
         confirmButtonText: "Confirm",
@@ -63,9 +63,9 @@ const EditProduct = () => {
         if (result.isConfirmed) {
           const res = (await updateProduct({ id: params.id, data: values })) as { data: TProduct };
           if (res.data?.id) {
-            Swal.fire("Product updated", "", "success");
+            Alert.fire("Product updated", "", "success");
           } else {
-            Swal.fire("Something went wrong", "", "error");
+            Alert.fire("Something went wrong", "", "error");
           }
         }
       });
@@ -103,122 +103,194 @@ const EditProduct = () => {
       {isLoading ? (
         <div>Loading...</div>
       ) : (
-        <CustomForm onsubmit={handleSubmit} defaultValues={defaultValues} key={formKey}>
-          <>
-            <CustomInput id='title' label='Title' name='title' placeholder='title' type='text' />
-            <CustomSelect
-              id='category'
-              label='Category'
-              name='category'
-              placeholder='category'
-              options={
-                categories?.map((category) => ({
-                  label: <span>{category}</span>,
-                  value: category,
-                })) || []
-              }
-              loading={isLoadingCategories}
-              showSearch
-            />
-            <CustomInput
-              id='description'
-              label='Description'
-              name='description'
-              placeholder='description'
-              type='text'
-            />
-            <CustomInput id='price' label='Price' name='price' placeholder='price' type='number' />
-            <CustomInput
-              id='discountPercentage'
-              label='Discount Percentage'
-              name='discountPercentage'
-              placeholder='discountPercentage'
-              type='number'
-            />
-            <CustomInput
-              id='rating'
-              label='Rating'
-              name='rating'
-              placeholder='rating'
-              type='number'
-            />
-            <CustomInput id='stock' label='Stock' name='stock' placeholder='stock' type='number' />
-            <CustomInput id='brand' label='Brand' name='brand' placeholder='brand' type='text' />
-            <CustomInput
-              id='thumbnail'
-              label='Thumbnail'
-              name='thumbnail'
-              placeholder='thumbnail'
-              type='text'
-            />
-            <CustomSelect id='tags' label='Tags' name='tags' placeholder='tags' mode='tags' />
-            <CustomInput
-              id='weight'
-              label='Weight'
-              name='weight'
-              placeholder='weight'
-              type='number'
-            />
-            <CustomInput
-              id='dimensions-width'
-              label='Dimensions Width'
-              name='dimensions.width'
-              placeholder='dimensions width'
-              type='number'
-            />
-            <CustomInput
-              id='dimensions-height'
-              label='Dimensions Height'
-              name='dimensions.height'
-              placeholder='dimensions height'
-              type='number'
-            />
-            <CustomInput
-              id='dimensions-depth'
-              label='Dimensions Depth'
-              name='dimensions.depth'
-              placeholder='dimensions depth'
-              type='number'
-            />
-            <CustomSelect
-              id='availabilityStatus'
-              label='Availability Status'
-              name='availabilityStatus'
-              placeholder='availabilityStatus'
-              options={[
-                {
-                  label: <span>IN_STOCK</span>,
-                  value: "In Stock",
-                },
-                {
-                  label: <span>OUT_OF_STOCK</span>,
-                  value: "Out of Stock",
-                },
-                {
-                  label: <span>Low Stock</span>,
-                  value: "Low Stock",
-                },
-              ]}
-            />
+        <>
+          {/* IN THIS FORM RESOLVER IS NOT NEEDED BECAUSE ALL FIELDS ARE IN DEFAULT VALUES */}
+          <CustomForm onsubmit={handleSubmit} defaultValues={defaultValues} key={formKey}>
+            <Row gutter={16}>
+              <>
+                <Col span={24} md={12}>
+                  <CustomInput
+                    id='title'
+                    label='Title'
+                    name='title'
+                    placeholder='title'
+                    type='text'
+                  />
+                </Col>
+                <Col span={24} md={12}>
+                  <CustomSelect
+                    id='category'
+                    label='Category'
+                    name='category'
+                    placeholder='category'
+                    options={
+                      categories?.map((category) => ({
+                        label: <span>{category}</span>,
+                        value: category,
+                      })) || []
+                    }
+                    loading={isLoadingCategories}
+                    showSearch
+                  />
+                </Col>
+                <Col span={24} md={12}>
+                  <CustomInput
+                    id='description'
+                    label='Description'
+                    name='description'
+                    placeholder='description'
+                    type='text'
+                  />
+                </Col>
+                <Col span={24} md={12}>
+                  <CustomInput
+                    id='price'
+                    label='Price'
+                    name='price'
+                    placeholder='price'
+                    type='number'
+                  />
+                </Col>
+                <Col span={24} md={12}>
+                  <CustomInput
+                    id='discountPercentage'
+                    label='Discount Percentage'
+                    name='discountPercentage'
+                    placeholder='discountPercentage'
+                    type='number'
+                  />
+                </Col>
+                <Col span={24} md={12}>
+                  <CustomInput
+                    id='rating'
+                    label='Rating'
+                    name='rating'
+                    placeholder='rating'
+                    type='number'
+                  />
+                </Col>
+                <Col span={24} md={12}>
+                  <CustomInput
+                    id='stock'
+                    label='Stock'
+                    name='stock'
+                    placeholder='stock'
+                    type='number'
+                  />
+                </Col>
+                <Col span={24} md={12}>
+                  <CustomInput
+                    id='brand'
+                    label='Brand'
+                    name='brand'
+                    placeholder='brand'
+                    type='text'
+                  />
+                </Col>
+                <Col span={24}>
+                  <CustomInput
+                    id='thumbnail'
+                    label='Thumbnail'
+                    name='thumbnail'
+                    placeholder='thumbnail'
+                    type='text'
+                  />
+                </Col>
+                <Col span={24} md={12}>
+                  <CustomSelect id='tags' label='Tags' name='tags' placeholder='tags' mode='tags' />
+                </Col>
+                <Col span={24} md={12}>
+                  <CustomInput
+                    id='weight'
+                    label='Weight'
+                    name='weight'
+                    placeholder='weight'
+                    type='number'
+                  />
+                </Col>
+                <Col span={24} md={12}>
+                  <CustomInput
+                    id='dimensions-width'
+                    label='Dimensions Width'
+                    name='dimensions.width'
+                    placeholder='dimensions width'
+                    type='number'
+                  />
+                </Col>
+                <Col span={24} md={12}>
+                  <CustomInput
+                    id='dimensions-height'
+                    label='Dimensions Height'
+                    name='dimensions.height'
+                    placeholder='dimensions height'
+                    type='number'
+                  />
+                </Col>
+                <Col span={24} md={12}>
+                  <CustomInput
+                    id='dimensions-depth'
+                    label='Dimensions Depth'
+                    name='dimensions.depth'
+                    placeholder='dimensions depth'
+                    type='number'
+                  />
+                </Col>
+                <Col span={24} md={12}>
+                  <CustomSelect
+                    id='availabilityStatus'
+                    label='Availability Status'
+                    name='availabilityStatus'
+                    placeholder='availabilityStatus'
+                    options={[
+                      {
+                        label: <span>IN_STOCK</span>,
+                        value: "In Stock",
+                      },
+                      {
+                        label: <span>OUT_OF_STOCK</span>,
+                        value: "Out of Stock",
+                      },
+                      {
+                        label: <span>Low Stock</span>,
+                        value: "Low Stock",
+                      },
+                    ]}
+                  />
+                </Col>
+                <Col span={24}>
+                  <CustomTextArea
+                    id='warrantyInformation'
+                    label='Warranty Information'
+                    name='warrantyInformation'
+                    placeholder='warrantyInformation'
+                  />
+                </Col>
+                <Col span={24}>
+                  <CustomTextArea
+                    id='shippingInformation'
+                    label='Shipping Information'
+                    name='shippingInformation'
+                    placeholder='shippingInformation'
+                  />
+                </Col>
 
-            <CustomTextArea
-              id='warrantyInformation'
-              label='Warranty Information'
-              name='warrantyInformation'
-              placeholder='warrantyInformation'
-            />
-            <CustomTextArea
-              id='shippingInformation'
-              label='Shipping Information'
-              name='shippingInformation'
-              placeholder='shippingInformation'
-            />
-
-            <Button loading={isLoadingUpdate} htmlType='submit' type='primary'>
-              Submit
-            </Button>
-          </>
-        </CustomForm>
+                <Col span={24}>
+                  <Button
+                    style={{ width: "100%" }}
+                    loading={isLoadingUpdate}
+                    htmlType='submit'
+                    type='primary'
+                  >
+                    Submit
+                  </Button>
+                </Col>
+              </>
+            </Row>
+          </CustomForm>
+          <div style={{ marginTop: 16 }}>
+            <ReviewForm reviews={product?.reviews} id={params.id} />
+          </div>
+        </>
       )}
     </div>
   );
