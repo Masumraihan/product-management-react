@@ -5,9 +5,11 @@ This application is a product management tool built with React, TypeScript, Redu
 ## Features
 
 - **Product List View**:
+
   - Fetch and display a list of products.
   - Implement pagination with `limit` and `skip` parameters.
   - Navigate to the Product Detail View for each product.
+
 - **Product Detail View**:
 
   - Display detailed information about a selected product.
@@ -24,11 +26,7 @@ This application is a product management tool built with React, TypeScript, Redu
 - **Styling and Layout**:
   - Use Ant Design's layout components for a responsive interface.
   - Apply custom styling.
-
-
-
-
-
+  - Implement Basic SEO optimization.
 
 ## Installation
 
@@ -39,4 +37,6 @@ yarn
 yarn dev
 ```
 
+## Live URL
 
+[https://product-management-react.vercel.app](https://product-management-react.vercel.app)
