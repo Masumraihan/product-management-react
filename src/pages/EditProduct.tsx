@@ -60,10 +60,10 @@ const EditProduct = () => {
         showCancelButton: true,
         confirmButtonText: "Confirm",
       }).then(async (result) => {
-        
         if (result.isConfirmed) {
           const res = (await updateProduct({ id: params.id, data: values })) as { data: TProduct };
           // API DOES NOT RETURN THE FULL PRODUCT DATA AFTER UPDATE
+          console.log(res);
           if (res.data?.id) {
             Alert.fire("Product updated", "", "success");
           } else {
