@@ -2,7 +2,7 @@ import { Form } from "antd";
 import TextArea from "antd/es/input/TextArea";
 import { Controller } from "react-hook-form";
 
-type TInputProps = {
+type TTextAreaProps = {
   placeholder?: string;
   name: string;
   label?: string;
@@ -10,7 +10,7 @@ type TInputProps = {
   defaultValue?: string;
 };
 
-const TodoCustomArea = ({ placeholder, name, label, id, defaultValue }: TInputProps) => {
+const CustomTextArea = ({ placeholder, name, label, id, defaultValue }: TTextAreaProps) => {
   return (
     <Controller
       name={name}
@@ -47,4 +47,4 @@ const TodoCustomArea = ({ placeholder, name, label, id, defaultValue }: TInputPr
   );
 };
 
-export default TodoCustomArea;
+export default CustomTextArea;

@@ -49,6 +49,7 @@ const ProductPage = () => {
         dataSource={data?.products}
         loading={isFetching}
         pagination={false}
+        rowKey='id'
       />
       <Pagination
         disabled={isFetching}

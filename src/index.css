@@ -3,7 +3,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  scroll-behavior: smooth;
+  /*scroll-behavior: smooth;*/
 }
 
 body {
@@ -12,7 +12,12 @@ body {
   font-weight: normal;
   font-style: normal;
 }
-
+.space-y-4 > *:not(:first-child) {
+  margin-top: 0.5rem;
+}
+.space-y-2 > *:not(:first-child) {
+  margin-top: 0.2rem;
+}
 .my-button {
   border: none;
   box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
@@ -20,9 +25,7 @@ body {
 .ant-layout-sider-zero-width-trigger {
   top: 13px !important;
 }
-.space-y-4 > *:not(:first-child) {
-  margin-top: 0.5rem;
-}
+
 .title {
   width: 100%;
   text-align: start !important;

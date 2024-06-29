@@ -3,17 +3,31 @@ import { Controller } from "react-hook-form";
 
 type TOption = {
   value: string;
-  label: string;
+  label: string | JSX.Element;
 };
 type TCustomSelectProps = {
-  options: TOption[];
+  options?: TOption[];
   name: string;
   label?: string;
   placeholder?: string;
   defaultValue?: string;
+  id?: string;
+  loading?: boolean;
+  showSearch?: boolean;
+  mode?: "multiple" | "tags";
 };
 
-const CustomSelect = ({ options, name, label, placeholder, defaultValue }: TCustomSelectProps) => {
+const CustomSelect = ({
+  options,
+  name,
+  label,
+  placeholder,
+  defaultValue,
+  id,
+  loading,
+  showSearch,
+  mode,
+}: TCustomSelectProps) => {
   return (
     <Controller
       name={name}
@@ -24,6 +38,10 @@ const CustomSelect = ({ options, name, label, placeholder, defaultValue }: TCust
             placeholder={placeholder}
             options={options}
             defaultValue={defaultValue}
+            id={id}
+            loading={loading}
+            showSearch={showSearch}
+            mode={mode}
           />
           {error && (
             <p style={{ color: "#FF0000", marginTop: "5px" }}>

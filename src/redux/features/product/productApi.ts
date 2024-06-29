@@ -17,12 +17,25 @@ const productApi = baseApi.injectEndpoints({
         };
       },
       transformResponse: (response: TProductsResponse) => response,
+      providesTags: ["products"],
     }),
     getSingleProduct: build.query({
       query: (id) => `/products/${id}`,
       transformResponse: (response: TProduct) => response,
+      providesTags: ["products"],
+    }),
+    updateProduct: build.mutation({
+      query: ({ id, data }) => {
+        return {
+          url: `/products/${id}`,
+          method: "PATCH",
+          body: data,
+        };
+      },
+      invalidatesTags: ["products"],
     }),
   }),
 });
 
-export const { useGetProductsQuery, useGetSingleProductQuery } = productApi;
+export const { useGetProductsQuery, useGetSingleProductQuery, useUpdateProductMutation } =
+  productApi;
