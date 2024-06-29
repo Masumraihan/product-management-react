@@ -1,0 +1,129 @@
+@import url("https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,200..900;1,200..900&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Crimson Pro", serif;
+  font-optical-sizing: auto;
+  font-weight: normal;
+  font-style: normal;
+}
+
+.my-button {
+  border: none;
+  box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
+}
+.ant-layout-sider-zero-width-trigger {
+  top: 13px !important;
+}
+.space-y-4 > *:not(:first-child) {
+  margin-top: 0.5rem;
+}
+.title {
+  width: 100%;
+  text-align: start !important;
+}
+.product-description {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  line-height: 1rem;
+  display: block;
+}
+
+.product-thumbnail-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  background-color: lightblue;
+}
+
+.product-thumbnail {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.product-images-container {
+  height: 100%;
+}
+.product-images-container img {
+  max-width: 140px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  cursor: pointer;
+  padding: 1rem;
+}
+
+.tags-container,
+.dimensions-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  margin-top: 1rem;
+}
+.tags,
+.dimensions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.tag,
+.dimension {
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  background-color: #00246b;
+  color: white;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.review {
+  border-right: 1px solid lightgray;
+  margin: 1rem;
+}
+.review:last-child {
+  border-right: none !important;
+}
+.review-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.review-date {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.review-rating {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+@media screen and (max-width: 768px) {
+  .title {
+    font-size: 20px !important;
+  }
+  .review {
+    border-right: none;
+  }
+}
