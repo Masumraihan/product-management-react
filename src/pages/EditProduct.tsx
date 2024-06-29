@@ -1,4 +1,4 @@
-import { Breadcrumb, Button, Col, Row } from "antd";
+import { Breadcrumb, Button, Col, Row, Typography } from "antd";
 import { useEffect, useState } from "react";
 import { FieldValues, SubmitHandler } from "react-hook-form";
 import { Link, useParams } from "react-router-dom";
@@ -14,6 +14,7 @@ import {
   useUpdateProductMutation,
 } from "../redux/features/product/productApi";
 import { TProduct } from "../types";
+import EditProductLoader from "../components/ui/EditProductLoader";
 
 const EditProduct = () => {
   const params = useParams();
@@ -59,9 +60,10 @@ const EditProduct = () => {
         showCancelButton: true,
         confirmButtonText: "Confirm",
       }).then(async (result) => {
-        /* Read more about isConfirmed, isDenied below */
+        
         if (result.isConfirmed) {
           const res = (await updateProduct({ id: params.id, data: values })) as { data: TProduct };
+          // API DOES NOT RETURN THE FULL PRODUCT DATA AFTER UPDATE
           if (res.data?.id) {
             Alert.fire("Product updated", "", "success");
           } else {
@@ -101,9 +103,12 @@ const EditProduct = () => {
     <div>
       <Breadcrumb items={breadcrumbItems} />
       {isLoading ? (
-        <div>Loading...</div>
+        <EditProductLoader />
       ) : (
         <>
+          <Typography.Title level={3} style={{ marginTop: 16 }}>
+            Edit Product
+          </Typography.Title>
           {/* IN THIS FORM RESOLVER IS NOT NEEDED BECAUSE ALL FIELDS ARE IN DEFAULT VALUES */}
           <CustomForm onsubmit={handleSubmit} defaultValues={defaultValues} key={formKey}>
             <Row gutter={16}>

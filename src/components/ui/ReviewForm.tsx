@@ -33,16 +33,15 @@ const ReviewForm = ({ reviews, id }: { reviews?: TReview[]; id?: string }) => {
 
     try {
       Alert.fire({
-        title: "Do you want to update this product?",
+        title: "Do you want to update this product review?",
         showCancelButton: true,
         confirmButtonText: "Confirm",
       }).then(async (result) => {
-        /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
           const res = (await updateProduct({ id: id, data: payload })) as { data: TProduct };
           // API DOES NOT RETURN THE FULL PRODUCT DATA AFTER UPDATE
           if (res.data?.id) {
-            Alert.fire("Product updated", "", "success");
+            Alert.fire("Product review updated", "", "success");
           } else {
             Alert.fire("Something went wrong", "", "error");
           }
